@@ -2,29 +2,32 @@ import random
 
 n=10
 
-def graf_30(n):
+def graf(n,x):
     l=[]
     m=[]
+    
+    k=x/100
     for i in range(n):
         m.append([0]*n)
-    nasycenie = (n*(n-1)*0.3)/2
+    nasycenie = int((n*(n-1)*k)/2)
     for i in range(n):
         l.append(i)
     random.shuffle(l)
-    print(l)
-    m[l[n-1]][l[0]]=1
-    m[l[0]][l[-1]]=1
-    for i in range(n-1):
-        a = l[i]
-        b = l[i+1]
-        print(a,b)
-        m[a][b]=1
-        m[b][a]=1
-    return m
 
-matrix = graf_30(n)
-for i in range(n):
-    print(matrix[i])
+    for i in range(len(l)-1):            
+        m[l[i]][l[i+1]]+=1
+        m[l[i+1]][l[i]]+=1
+    print(l)
+    print()
+    for i in range(len(l)):
+        print(m[i])
+
+    for i in range(3):
+        trojki=[]
+        
+
+    return nasycenie
+print(graf(10,30)) 
 
 
 
