@@ -4,21 +4,27 @@ n=10
 
 def graf_30(n):
     l=[]
-    m=[[0]*n]*n
+    m=[]
+    for i in range(n):
+        m.append([0]*n)
     nasycenie = (n*(n-1)*0.3)/2
     for i in range(n):
         l.append(i)
     random.shuffle(l)
-
-    for i in range(len(l)-1):            #
-        m[][]=1
-        m[][]=1
     print(l)
-    for i in range(len(l)):
-        print(m[i])
+    m[l[n-1]][l[0]]=1
+    m[l[0]][l[-1]]=1
+    for i in range(n-1):
+        a = l[i]
+        b = l[i+1]
+        print(a,b)
+        m[a][b]=1
+        m[b][a]=1
+    return m
 
-    return 
-print(graf_30(n)) 
+matrix = graf_30(n)
+for i in range(n):
+    print(matrix[i])
 
 
 
