@@ -1,6 +1,8 @@
 import random
+import sys
 
-n=6
+sys.setrecursionlimit(1000000)
+n=1000
 
 # x w procentach
 def graf(n,x):
@@ -63,47 +65,64 @@ def graf_bez_cyklu(n,x):
     return m
 
 mm = graf(n,70)
-for i in mm:
-    print(i)
+# for i in mm:
+#     print(i)
 
 # print()
 # m = graf_bez_cyklu(n,50)
 # for i in m:
 #     print(i)
 
+def cykle(mm):
+    n=len(mm)
+    O=[0]*n
+    path = []
+    visited=0
+    start=0
 
-O=[0]*n
-path = []
-visited=0
-start=0
-
-def hamilton(v,visited):
-    O[v]=1
-    visited+=1
-    print(path)
-    for i in range(n):
-        if mm[v][i]==1:
-            if i==start and visited==n:
-                return True
-            if O[i]==0:
-                if hamilton(i,visited):
-                    path.append(i)
+    def hamilton(v,visited,path):
+        O[v]=1
+        visited+=1
+        for i in range(n):
+            if mm[v][i]==1:
+                if i==start and visited==n:
+                    # print(path)
                     return True
-    O[v]=0
-    visited -= 1
-    return False
+                if O[i]==0:
+                    if hamilton(i,visited,path):
+                        path.append(i)
+                        # print(path)
+                        return True
+        O[v]=0
+        visited -= 1
+        return False
 
-def hcycle():
+    def hcycle():
+        for i in range(n):
+            path.append(0)
+            start=0
+            visited=0
+            hcycle = hamilton(start,visited,path)
+            if hcycle:
+                # print(hcycle)
+                to_add=path[0]
+                path.append(to_add)
+                return path
+                # break
+            return False
+    return hcycle()
+print()
+a=cykle(mm)
+print(a)
+
+def euler(m,v=0,stos=[]):
+    n=len(m)
     for i in range(n):
-        path.append(0)
-        start=0
-        visited=0
-        k=2
-        hcycle = hamilton(start,visited)
-        print(hcycle)
-        # print(path)
+        if m[v][i]==1:
+            m[v][i]=0
+            m[i][v]=0
+            euler(m,i,stos)
+    stos.append(v)
+    return stos
 
-hcycle()
-
-
-
+print(euler(mm))
