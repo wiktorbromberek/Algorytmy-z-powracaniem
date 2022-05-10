@@ -1,6 +1,6 @@
 import random
 
-n=100
+n=1000
 
 # x w procentach
 def graf(n,x):
@@ -11,6 +11,7 @@ def graf(n,x):
     for i in range(n):
         m.append([0]*n)
     nasycenie = int((n*(n-1)*k)/2)
+    # print(nasycenie)
     for i in range(n):
         l.append(i)
     random.shuffle(l)
@@ -22,18 +23,11 @@ def graf(n,x):
     m[l[0]][l[-1]]=1
     count += 1
     while count<nasycenie:
-        if count+3>nasycenie:
-            break
-        a = random.randrange(0,n)
-        b = random.randrange(0,n)
-        while a==b or m[a][b]==1:
-            b = random.randrange(0,n)
-        c = random.randrange(0,n)
-        while a==c or b==c or m[a][c]==1 or m[b][c]==1:
-            c = random.randrange(0,n)
+        a=0;b=0;c=0
+        while a==b or a==c or b==c or m[a][b]==1 or m[a][c]==1 or m[b][c]==1: 
+            a,b,c = random.sample(range(0,n),3)
         m[a][b]=1; m[b][a]=1; m[a][c]=1; m[c][a]=1; m[b][c]=1; m[c][b]=1
         count += 3
-    print()
     return m
 
 def graf_bez_cyklu(n,x):
@@ -55,25 +49,23 @@ def graf_bez_cyklu(n,x):
     m[l[0]][l[-1]]=1
     count += 1
     while count<nasycenie:
-        if count+3>nasycenie:
-            break
-        a = random.randrange(0,n)
-        b = random.randrange(0,n)
-        while a==b or m[a][b]==1:
-            b = random.randrange(0,n)
-        c = random.randrange(0,n)
-        while a==c or b==c or m[a][c]==1 or m[b][c]==1:
-            c = random.randrange(0,n)
+        a=0;b=0;c=0
+        while a==b or a==c or b==c or m[a][b]==1 or m[a][c]==1 or m[b][c]==1: 
+            a,b,c = random.sample(range(0,n),3)
         m[a][b]=1; m[b][a]=1; m[a][c]=1; m[c][a]=1; m[b][c]=1; m[c][b]=1
         count += 3
-        # print(a,b,c)
     j = random.randrange(0,n)
-    # print(j)
     for i in range(n):
         m[j][i]=0
         m[i][j]=0
     return m
 
-mm = graf(n,50)
+mm = graf(n,70)
 for i in mm:
     print(i)
+
+
+# print()
+# m = graf_bez_cyklu(n,50)
+# for i in m:
+#     print(i)
