@@ -1,6 +1,6 @@
 import random
 
-n=1000
+n=6
 
 # x w procentach
 def graf(n,x):
@@ -15,6 +15,8 @@ def graf(n,x):
     for i in range(n):
         l.append(i)
     random.shuffle(l)
+    print(l)
+    print()
     for i in range(len(l)-1):            
         m[l[i]][l[i+1]]+=1
         m[l[i+1]][l[i]]+=1
@@ -60,28 +62,48 @@ def graf_bez_cyklu(n,x):
         m[i][j]=0
     return m
 
-def hamilton(m,n,path=[],O=[0]*n,visited=0,v=0):
+mm = graf(n,70)
+for i in mm:
+    print(i)
+
+# print()
+# m = graf_bez_cyklu(n,50)
+# for i in m:
+#     print(i)
+
+
+O=[0]*n
+path = []
+visited=0
+start=0
+
+def hamilton(v,visited):
     O[v]=1
     visited+=1
     print(path)
     for i in range(n):
-        if m[v][i]==1:
+        if mm[v][i]==1:
             if i==start and visited==n:
                 return True
             if O[i]==0:
-                if hamilton(m,n,path,O,visited,i):
+                if hamilton(i,visited):
                     path.append(i)
                     return True
     O[v]=0
     visited -= 1
     return False
 
-mm = graf(n,70)
-for i in mm:
-    print(i)
+def hcycle():
+    for i in range(n):
+        path.append(0)
+        start=0
+        visited=0
+        k=2
+        hcycle = hamilton(start,visited)
+        print(hcycle)
+        # print(path)
+
+hcycle()
 
 
-# print()
-# m = graf_bez_cyklu(n,50)
-# for i in m:
-#     print(i)
+
