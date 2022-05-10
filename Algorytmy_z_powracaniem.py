@@ -60,6 +60,22 @@ def graf_bez_cyklu(n,x):
         m[i][j]=0
     return m
 
+def hamilton(m,n,path=[],O=[0]*n,visited=0,v=0):
+    O[v]=1
+    visited+=1
+    print(path)
+    for i in range(n):
+        if m[v][i]==1:
+            if i==start and visited==n:
+                return True
+            if O[i]==0:
+                if hamilton(m,n,path,O,visited,i):
+                    path.append(i)
+                    return True
+    O[v]=0
+    visited -= 1
+    return False
+
 mm = graf(n,70)
 for i in mm:
     print(i)
