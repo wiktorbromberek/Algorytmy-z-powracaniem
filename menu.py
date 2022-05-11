@@ -233,13 +233,16 @@ while True:
                 print(l[k])
             print()
             while True:
-                print("Jeżeli chcesz wyświetlić drogę Eulera, wciśnij 1, jeżeli chcesz wrócić, wciśnij 0")
+                print("Wybierz algorytm 1-Hamilton, 2-Euler, lub wybierz 0 aby wrócić")
                 n=int(input())
                 if n==1:
+                    print(cykle_lista_nastepnikow(l))
+                    print()
+                elif n==2:
                     print(euler_lista_nastepnikow(l))
                     print()
                 elif n==0:
-                    break    
+                    break  
 
 
 # m=graf_bez_cyklu(10)
