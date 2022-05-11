@@ -130,6 +130,66 @@ def euler(m,v=0,stos=[]):
 
 
 
+def lista_nastepnikow(m):
+    l=[]
+    for i in range(len(m)):
+        l1=[]
+        for j in range(len(m)):
+            if m[i][j]==1:
+                l1.append(j)
+        l.append(l1)
+    return l
+
+
+def cykle_lista_nastepnikow(lista):
+    n=len(lista)
+    O=[0]*n
+    path = []
+    visited=0
+    start=0
+
+    def hamilton(v,visited,path):
+        O[v]=1
+        visited+=1
+        for i in lista[v]:
+            if i==start and visited==n:
+                # print(path)
+                return True
+            if O[i]==0:
+                if hamilton(i,visited,path):
+                    path.append(i)
+                    # print(path)
+                    return True
+        O[v]=0
+        visited -= 1
+        return False
+
+    def hcycle():
+        for i in range(n):
+            path.append(0)
+            start=0
+            visited=0
+            hcycle = hamilton(start,visited,path)
+            if hcycle:
+                # print(hcycle)
+                to_add=path[0]
+                path.append(to_add)
+                return path
+                # break
+            return False
+    return hcycle()
+
+
+
+def euler_lista_nastepnikow(lista,v=0,stos=[]):
+    for i in lista[v]:
+        lista[v].remove(i)
+        lista[i].remove(v)
+        euler_lista_nastepnikow(lista,i,stos)
+    stos.append(v)
+    return stos
+
+
 while True:
     print("Wybierz typ grafu 1-graf hamiltonowski, 2-graf niehamiltonowski, lub wyjdź z progamu wciskając 0")
     n=int(input())
@@ -141,23 +201,25 @@ while True:
             i=int(input())
             j=int(input())
             m=graf(i,j)
-            for k in range(len(m)):
-                print(m[k])
+            l=lista_nastepnikow(m)
+            for k in range(len(l)):
+                print(l[k])
             while True:
                 print("Wybierz algorytm 1-Hamilton, 2-Euler, lub wybierz 0 aby wrócić")
                 n=int(input())
                 if n==1:
-                    print(cykle(m))
+                    print(cykle_lista_nastepnikow(l))
                 elif n==2:
-                    print(euler(m))
+                    print(euler_lista_nastepnikow(l))
                 elif n==0:
                     break
         elif n==2:
             print("Wybrano funkcję - graf bez cyklu, podaj liczbę wierzchołków")
             i=int(input())
             m=graf_bez_cyklu(i)
-            for k in range(len(m)):
-                print(m[k])
+            l=lista_nastepnikow(m)
+            for k in range(len(l)):
+                print(l[k])
             while True:
                 print("Jeżeli chcesz wyświetlić drogę Eulera, wciśnij 1, jeżeli chcesz wrócić, wciśnij 0")
                 n=int(input())
@@ -165,3 +227,8 @@ while True:
                     print(euler(m))
                 elif n==0:
                     break    
+
+
+# m=graf(10,70)
+# l=lista_nastepnikow(m)
+# print(l)
