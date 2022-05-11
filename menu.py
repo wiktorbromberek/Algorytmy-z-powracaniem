@@ -141,6 +141,16 @@ def lista_nastepnikow(m):
     return l
 
 
+def lista_nastepnikow(m):
+    l=[]
+    for i in range(len(m)):
+        l1=[]
+        for j in range(len(m)):
+            if m[i][j]==1:
+                l1.append(j)
+        l.append(l1)
+    return l
+
 def cykle_lista_nastepnikow(lista):
     n=len(lista)
     O=[0]*n
@@ -180,7 +190,6 @@ def cykle_lista_nastepnikow(lista):
     return hcycle()
 
 
-
 def euler_lista_nastepnikow(lista,v=0,stos=[]):
     for i in lista[v]:
         lista[v].remove(i)
@@ -188,7 +197,6 @@ def euler_lista_nastepnikow(lista,v=0,stos=[]):
         euler_lista_nastepnikow(lista,i,stos)
     stos.append(v)
     return stos
-
 
 while True:
     print("Wybierz typ grafu 1-graf hamiltonowski, 2-graf niehamiltonowski, lub wyjdź z progamu wciskając 0")
