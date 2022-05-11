@@ -4,7 +4,7 @@ import time
 
 #najbardziej optymalna jest lista następników
 #macierz tez spoko ale ciut wolniejsza
-#tabela krawedzi w chuj wolna, kto by sie spodziewał XD
+#tabela krawedzi w chuj wolna, kto by sie spodziewał XD troche sie nie spodziewałem, ale w sumie sie spodziewałem ;))
 
 sys.setrecursionlimit(1000000)
 n=20
