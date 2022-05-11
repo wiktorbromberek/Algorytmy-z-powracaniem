@@ -236,7 +236,7 @@ while True:
                 print("Jeżeli chcesz wyświetlić drogę Eulera, wciśnij 1, jeżeli chcesz wrócić, wciśnij 0")
                 n=int(input())
                 if n==1:
-                    print(euler_lista_nastepnikow(m))
+                    print(euler_lista_nastepnikow(l))
                     print()
                 elif n==0:
                     break    
